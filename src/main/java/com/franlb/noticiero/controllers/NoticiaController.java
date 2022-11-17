@@ -3,6 +3,8 @@ package com.franlb.noticiero.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,10 +12,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.franlb.noticiero.model.Noticia;
+import com.franlb.noticiero.model.Usuario;
 
 @Controller
 @RequestMapping("noticias")
 public class NoticiaController {
+
+    @RequestMapping(value = "/signin")
+    public ModelAndView signin(Usuario usuario,HttpSession session) {
+
+        session.setAttribute("usuario", usuario);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("noticias", getNoticias());
+        modelAndView.setViewName("noticias/list");
+        return modelAndView;
+    }
 
     @RequestMapping(value = "/list")
     public ModelAndView list() {
@@ -33,7 +47,7 @@ public class NoticiaController {
     @PostMapping(value = "/createNoticia")
     public ModelAndView saveNoticia(Noticia noticia) {
         ModelAndView modelAndView = new ModelAndView();
-        
+
         List<Noticia> noticias = getNoticias();
         noticias.add(noticia);
 

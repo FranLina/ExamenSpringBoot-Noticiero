@@ -35,15 +35,14 @@
                             </li>
                         </ul>
 
-
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="text" th:placeholder="#{menu.usuario}">
-                            <input class="form-control me-2" type="password" th:placeholder="#{menu.contraseña}">
-                            <button class="btn btn-outline-success" type="submit"
-                                th:text="#{menu.signin}">Iniciarsesion</button>
+                         
+                        <form th:if="${session != null}" class="d-flex" th:action="@{signin}" method="post">
+                            <input class="form-control me-2" type="text" name="usuario" id="usuario" th:placeholder="#{menu.usuario}">
+                            <input class="form-control me-2" type="password" name="password" id="password" th:placeholder="#{menu.contraseña}">
+                            <button class="btn btn-outline-success" type="submit" th:text="#{menu.signin}"></button>
                         </form>
 
-                        <!--<div><a th:href="@{/login/logout}" th:text="${session.usuario.usuario}"></a></div>-->
+                        <div th:if="${session == null}"><a th:href="@{/login/logout}" th:text="${session}"></a></div>
                 </div>
             </div>
         </nav>
