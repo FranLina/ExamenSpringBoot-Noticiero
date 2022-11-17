@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+    <div th:fragment="menu">
+        <!-- Menu principal -->
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" th:text="#{menu.menu}" href="#">Menu</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" th:href="@{/}" aria-current="page" href="#"
+                                th:text="#{menu.noticias}">Noticias</a>
+                        </li>
+                        <!--Idioma-->
+
+                        <ul class="navbar-nav">
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">&#127760;
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" th:href="@{?idioma_setting=es}" href="#"
+                                        th:text="#{menu.idioma.espanol}"></a>
+                                    <a class="dropdown-item" th:href="@{?idioma_setting=en}" href="#"
+                                        th:text="#{menu.idioma.ingles}"></a>
+                                </div>
+                            </li>
+                        </ul>
+
+
+                        <form class="d-flex">
+                            <input class="form-control me-2" type="text" th:placeholder="#{menu.usuario}">
+                            <input class="form-control me-2" type="password" th:placeholder="#{menu.contraseña}">
+                            <button class="btn btn-outline-success" type="submit" th:text="#{menu.signin}">Iniciar
+                                sesion</button>
+                        </form>
+
+                        <!--<div><a th:href="@{/login/logout}" th:text="${session.usuario.usuario}"></a></div>-->
+                </div>
+            </div>
+        </nav>
+    </div>
+</body>
+
+</html>
