@@ -23,6 +23,25 @@ public class NoticiaController {
         return modelAndView;
     }
 
+    @RequestMapping(value = {"/nuevaNoticia"} )
+    public ModelAndView nuevo() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("noticias/nuevaNoticia");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "/createNoticia")
+    public ModelAndView saveNoticia(Noticia noticia) {
+        ModelAndView modelAndView = new ModelAndView();
+        
+        List<Noticia> noticias = getNoticias();
+        noticias.add(noticia);
+
+        modelAndView.addObject("noticias", noticias);
+        modelAndView.setViewName("noticias/list");
+        return modelAndView;
+    }
+
     @RequestMapping(value = {"/modificarNoticia"} )
     public ModelAndView edit(
         @RequestParam(name="codigo",required = true) int codigo
@@ -34,8 +53,8 @@ public class NoticiaController {
     }
 
     @PostMapping(value = "/editNoticia")
-    public ModelAndView editCliente(Noticia noticia) {
-        
+    public ModelAndView editNoticia(Noticia noticia) {
+
         ModelAndView modelAndView = new ModelAndView();
         List<Noticia> noticias = getNoticias();
 
@@ -43,6 +62,20 @@ public class NoticiaController {
         noticias.set(indexOf,noticia);
 
         modelAndView.addObject("noticias", noticias);
+        modelAndView.setViewName("noticias/list");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/borrarNoticia")
+    public ModelAndView delete(
+        @RequestParam(name="codigo",required = true) int codigo
+    ) {
+        List<Noticia> noticias = getNoticias();
+        noticias.remove(new Noticia(codigo));
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.addObject("noticias",noticias);
         modelAndView.setViewName("noticias/list");
         return modelAndView;
     }
